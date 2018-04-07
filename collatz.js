@@ -1,13 +1,16 @@
-const getNumberOfCollatzSteps = (number, numberOfSteps) => {
+const getCollatzNumber = (number, previousNumber, numberOfSteps, breakNumber) => {
     ++numberOfSteps;
 
-    if (number === 4) {
-        return numberOfSteps;
+    if (number === breakNumber) {
+        return {
+            numberOfSteps,
+            previousNumber
+        };
     }
 
     if (number % 2 == 0) {
-        return getNumberOfCollatzSteps(number / 2, numberOfSteps);
+        return getCollatzNumber(number / 2, number, numberOfSteps, breakNumber);
     } else {
-        return getNumberOfCollatzSteps(number * 3 + 1, numberOfSteps);
+        return getCollatzNumber(number * 3 + 1, number, numberOfSteps, breakNumber);
     }
 }
