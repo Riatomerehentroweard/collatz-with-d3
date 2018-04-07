@@ -1,31 +1,30 @@
-//1 2 4 8
-
 const collatzData = [];
 const numbersReachingFour = {}
+const breakNumber = 1;
+const sequences = [];
 
-const ceiling = 10000;
-for (let i = 1; i < ceiling; i++) {
-    console.log((i/ceiling)*100 + '%');
-    
-    const collatzNumber = getCollatzNumber(i, i, 0, 4);
+const ceiling = 100000;
+for (let i = breakNumber; i < ceiling; i++) {
+
+    const collatzNumber = getCollatzNumber(i, i, 0, breakNumber);
     collatzData.push({
         x: i,
         y: collatzNumber.numberOfSteps
     });
 
-    if(numbersReachingFour[collatzNumber.previousNumber]) {
+    if (numbersReachingFour[collatzNumber.previousNumber]) {
         numbersReachingFour[collatzNumber.previousNumber].hits++;
     } else {
         numbersReachingFour[collatzNumber.previousNumber] = {
             hits: 1
         }
-    }  
+    }
+
+    sequences.push(collatzNumber.sequence);
 }
 
-console.log(numbersReachingFour);
+console.log(sequences);
 
-
-// simplest way to plot
 var data = {
     name: 'points',
     values: collatzData
