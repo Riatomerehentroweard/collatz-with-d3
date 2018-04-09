@@ -3,7 +3,7 @@ const numbersReachingFour = {}
 const breakNumber = 1;
 const sequences = [];
 
-const ceiling = 10;
+const ceiling = 200;
 for (let i = breakNumber; i < ceiling; i++) {
 
     const collatzNumber = getCollatzNumber(i, i, 0, breakNumber);
