@@ -3,7 +3,7 @@ const numbersReachingFour = {}
 const breakNumber = 1;
 const sequences = [];
 
-const ceiling = 100000;
+const ceiling = 10;
 for (let i = breakNumber; i < ceiling; i++) {
 
     const collatzNumber = getCollatzNumber(i, i, 0, breakNumber);
@@ -23,12 +23,13 @@ for (let i = breakNumber; i < ceiling; i++) {
     sequences.push(collatzNumber.sequence);
 }
 
-console.log(sequences);
-
 var data = {
     name: 'points',
     values: collatzData
 };
 new LineChart()
-    .for([data])
-    .plot();
+.for([data])
+.plot();
+
+// convert sequences to tree structure for the drawing of the sequence-tree
+const treeData = convertSequenceToTreeData(sequences);

@@ -35,28 +35,29 @@
     };
  */
 
-
-
-//  TODO save interanlly as object an in the end map children to arrays with Object.values()
-
 const convertSequenceToTreeData = (sequences) => {
 
     const tree = {};
 
     sortSequencesByFirstDigit(sequences);
 
-    for (let i = 0; i < sequences.length; i++) {
-        const element = sequences[i];
-
-        if (!tree[element]) {
-            tree[element] = {
-                "name": element
-            }
-        }
-        
+    for (let sequence of sequences) {
+        addElement(tree, sequence);
     }
 
-    var addElement = function addElement(treeLevel, sequence) {
+    return convertObjectTreeToArrayTree(tree)[0];
+    
+    function convertObjectTreeToArrayTree(tree) {
+        tree = Object.values(tree);
+        tree.forEach((element, index, array) => {
+            if (element.children) {
+                array[index].children = convertObjectTreeToArrayTree(element.children);
+            }
+        })
+        return tree;
+    }
+
+    function addElement(treeLevel, sequence) {
         const number = sequence[0];
 
         if (!treeLevel[number]) {
